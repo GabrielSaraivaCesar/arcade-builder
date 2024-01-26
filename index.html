@@ -69,7 +69,7 @@
                     <div class="image-input">
                         <img class="preview-image" id="bg-image-preview" src="">
                         <span>+</span>
-                        <input id="image-input" type="file" accept="image/png, image/jpeg">
+                        <input id="image-input" type="file" accept=".png,.jpeg,.jpg">
                     </div>
                 </div>
 
@@ -353,16 +353,21 @@
             </div>
         </div>
 
-        <div class="float-button" style="right: 400px;" custom-tooltip data-title="Exportar Configurações">
+        <div id="export-file-btn" class="float-button" style="right: 400px;" custom-tooltip data-title="Exportar Configurações">
             <i class="fas fa-file-export" style="margin-right: -5px;"></i>
         </div>
-        <div class="float-button" style="right: 470px;" custom-tooltip data-title="Salvar Pré-visualização">
+        <div class="float-button" style="right: 470px;" custom-tooltip data-title="Importar Configurações">
+            <input type="file" accept=".UA" id="import-file-btn" >
+            <i class="fas fa-file-import"></i>
+        </div>
+        <div id="export-img-btn" class="float-button" style="right: 540px;" custom-tooltip data-title="Salvar Pré-visualização">
             <i class="fas fa-camera"></i>
         </div>
     </main>
 </body>
 </html>
 <script src="https://kit.fontawesome.com/bb7d73c661.js" crossorigin="anonymous"></script>
+<script src="/js/utils.js"></script>
 <script type="module" src="/js/main.js"></script>
 <script src="/js/horizontal_selector_input.js"></script>
 <script src="/js/attribute_editor.js"></script>

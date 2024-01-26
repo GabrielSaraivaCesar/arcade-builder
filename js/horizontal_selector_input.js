@@ -1,6 +1,15 @@
 class HorizontalSelectorInput extends HTMLElement {
     options = [];
-    value = null;
+    _value = null;
+    isCustomComponent = true;
+
+    get value() {
+        return this._value;
+    }
+
+    set value(v) {
+        this.selectOption(v);
+    }
 
     constructor() {
         super();
@@ -43,7 +52,7 @@ class HorizontalSelectorInput extends HTMLElement {
     }
 
     selectOption(optionValue) {
-        this.value = optionValue;
+        this._value = optionValue;
         const options = this.querySelectorAll('.horizontal-selector-input-option');
 
         options.forEach(optionElement => {

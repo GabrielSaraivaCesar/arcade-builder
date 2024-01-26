@@ -16,9 +16,19 @@ function closeColorEditorModal() {
     selectedButtonId = null;
     colorPicker.style.display = "none";
 }
+function moveModalToBtnPosition(btn) {
+    let noBorderColor = btn.classList.contains('joystick-type') || btn.classList.contains('keyboard-key') || btn.classList.contains('legend-type');
+    let noTextColor = !btn.classList.contains('legend-type');
+    
+    let btnRect = btn.getBoundingClientRect();
+    let containerRect = colorPicker.getBoundingClientRect();
+    // Setting color picker container position on top the top of the button
+    colorPicker.style.left = (btnRect.left-containerRect.width - 50)+'px';
+    colorPicker.style.top = (btnRect.top-containerRect.height + ((noBorderColor && noTextColor) ? 15 : 40))+'px';
+}
 function openColorEditorModal(btn) {
-    let noBorderColor = btn.classList.contains('joystick-type') || btn.classList.contains('keyboard-key') || btn.classList.contains('legend-type')
-    let noTextColor = !btn.classList.contains('legend-type')
+    let noBorderColor = btn.classList.contains('joystick-type') || btn.classList.contains('keyboard-key') || btn.classList.contains('legend-type');
+    let noTextColor = !btn.classList.contains('legend-type');
 
     if (noBorderColor) {
         colorPicker.querySelector('.color-picker-border').style.display = 'none';
@@ -34,11 +44,7 @@ function openColorEditorModal(btn) {
 
     colorPicker.style.display = "flex";
     
-    let btnRect = btn.getBoundingClientRect();
-    let containerRect = colorPicker.getBoundingClientRect();
-    // Setting color picker container position on top the top of the button
-    colorPicker.style.left = (btnRect.left-containerRect.width - 50)+'px';
-    colorPicker.style.top = (btnRect.top-containerRect.height + ((noBorderColor && noTextColor) ? 15 : 40))+'px';
+    moveModalToBtnPosition(btn);
 
     // Remove previously selected option before setting the correct one
     colorOptionsBtn.forEach(opt => opt.classList.remove('selected'));
@@ -52,12 +58,17 @@ function openColorEditorModal(btn) {
     [...colorOptionsBtn].find(opt => {
         return opt.getAttribute('data-name') === btnBgColor;
     }).classList.add('selected');
-    [...colorOptionsBorder].find(opt => {
-        return opt.getAttribute('data-name') === btnBorderColor;
-    }).classList.add('selected');
-    [...colorOptionsText].find(opt => {
-        return opt.getAttribute('data-name') === btnTextColor;
-    }).classList.add('selected');
+    if (!noBorderColor) {
+        [...colorOptionsBorder].find(opt => {
+            return opt.getAttribute('data-name') === btnBorderColor;
+        }).classList.add('selected');
+    }
+
+    if (!noTextColor) {
+        [...colorOptionsText].find(opt => {
+            return opt.getAttribute('data-name') === btnTextColor;
+        }).classList.add('selected');
+    }
 }
 
 function getColorDataBasedOnColorOptionButton(color) {
@@ -100,6 +111,19 @@ colorOptionsText.forEach(color => {
             btn.style.color = colorCode;
         }
     })
+})
+
+document.querySelector("#customization-box").addEventListener('scroll', evt => {
+    if (!selectedButtonId) return;
+    let btn = document.querySelector(`.button-color-editor#${selectedButtonId}`);
+    if (btn) {
+        let btnRect = btn.getBoundingClientRect();
+        if (btnRect.top > window.innerHeight - 65) {
+            closeColorEditorModal();
+        } else {
+            moveModalToBtnPosition(btn);
+        }
+    }
 })
 
 
@@ -267,20 +291,29 @@ latBtnsQuantInput.addEventListener('change', (evt) => {
 
 
 
+// ------ LAT BTN SIZE ------ 
+const latBtnsSizeInput = document.querySelector('#lat-btns-size-input');
+function loadLatButtonsSize() {
+    // TODO - size change
+}
+latBtnsSizeInput.addEventListener('change', (evt) => {
+    loadLatButtonsSize();
+})
+
+
 // ------ BACKGROUND IMAGE ------ 
 const imageInput = document.querySelector('#image-input');
 const imagePreview = document.querySelector('#bg-image-preview');
 function loadBackgroundImage(imageUrl) {
     imagePreview.src = imageUrl;
 }
+
 imageInput.addEventListener('change', () => {
     let file = imageInput.files[0];
-    var reader = new FileReader();
-    reader.onloadend = function() {
-        loadBackgroundImage(reader.result)
-    }
     if (file) {
-        reader.readAsDataURL(file);
+        readImage(file).then(url => {
+            loadBackgroundImage(url);
+        })
     } else {
         loadBackgroundImage("")
     }
@@ -288,13 +321,109 @@ imageInput.addEventListener('change', () => {
 })
 
 
-window.addEventListener('load', () => {
+
+// ------ EXPORT FILE ------
+const exportFileButton = document.querySelector('#export-file-btn');
+function download(filename, text) {
+    // This function creates a download button with the content that we need to download, then clicks it to start the download
+    let element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+}
+exportFileButton.addEventListener('click', () => {
+    const resultJson = {
+        'model-input': document.getElementById('model-input').value,
+        'invert-inputs': document.getElementById('invert-inputs').checked,
+        'layout-input': document.getElementById('layout-input').value,
+        'main-btns-quant-input': document.getElementById('main-btns-quant-input').value,
+        'main-btns-size-input': document.getElementById('main-btns-size-input').value,
+        'main-btns-legends-switch': document.getElementById('main-btns-legends-switch').value,
+        'main-btns-legends-type': document.getElementById('main-btns-legends-type').value,
+        'lat-btns-quant-input': document.getElementById('lat-btns-quant-input').value,
+        'lat-btns-size-input': document.getElementById('lat-btns-size-input').value,
+        'image-input': document.getElementById('bg-image-preview').src,
+    }
+
+    const addColorEditorToFile = (colorEditor) => {
+        resultJson[colorEditor.id] = {
+            'style': colorEditor.getAttribute('style'),
+            'data-bg-color': colorEditor.getAttribute('data-bg-color'),
+            'data-border-color': colorEditor.getAttribute('data-border-color'),
+            'data-text-color': colorEditor.getAttribute('data-text-color'),
+        }
+    }
+
+    // All main buttons
+    document.querySelectorAll('.button-container#layout-'+resultJson['layout-input']+' .button-color-editor').forEach(button => {
+        addColorEditorToFile(button)
+    });
+    
+    // Legend color
+    let legendColor = document.getElementById('legend-color-btn');
+    addColorEditorToFile(legendColor);
+   
+    // All lateral buttons
+    document.querySelectorAll('.button-container-lateral .button-color-editor').forEach(button => {
+        addColorEditorToFile(button)
+    });
+
+    download('arcade_builder_proj.UA', JSON.stringify(resultJson));
+})
+
+
+
+// ------ IMPORT FILE ------
+const importFileButton = document.querySelector('#import-file-btn');
+importFileButton.addEventListener('change', () => {
+    
+    let file = importFileButton.files[0];
+    readTextFile(file).then(text => {
+        const data = JSON.parse(text);
+        const elementsToIgnore = ['image-input'];
+
+        Object.keys(data).forEach(elementId => {
+            if (elementsToIgnore.includes(elementId)) return;
+
+            const value = data[elementId];
+            const element = document.getElementById(elementId);
+
+            if (typeof value === 'boolean') {
+                element.checked = value;
+            } else if (typeof value === 'string') {
+                element.value = value;
+            } else if (typeof value === 'object') {
+                Object.keys(value).forEach(attribute => {
+                    if (value[attribute] != null) {
+                        element.setAttribute(attribute, value[attribute]);
+                    }
+                })
+            }
+        });
+
+        if (data['image-input']) {
+            document.getElementById('bg-image-preview').src = data['image-input'];
+        }
+        initAttributeEditor();
+    })
+});
+
+function initAttributeEditor() {
+    
     // Execute functions based on input values
+    loadArcadeLayout();
     loadMainButtonsVisibility();
     loadMainButtonsSize();
     initButtonsInvertState();
-    loadArcadeLayout();
     loadLegends();
     loadLegendsType();
     loadButtonsColors();
+    loadLatButtonsVisibility();
+    loadLatButtonsSize();
+}
+window.addEventListener('load', () => {
+    initAttributeEditor();
 })
