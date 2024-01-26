@@ -266,6 +266,28 @@ latBtnsQuantInput.addEventListener('change', (evt) => {
 })
 
 
+
+// ------ BACKGROUND IMAGE ------ 
+const imageInput = document.querySelector('#image-input');
+const imagePreview = document.querySelector('#bg-image-preview');
+function loadBackgroundImage(imageUrl) {
+    imagePreview.src = imageUrl;
+}
+imageInput.addEventListener('change', () => {
+    let file = imageInput.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function() {
+        loadBackgroundImage(reader.result)
+    }
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        loadBackgroundImage("")
+    }
+
+})
+
+
 window.addEventListener('load', () => {
     // Execute functions based on input values
     loadMainButtonsVisibility();

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/horizontal-selector-input.css">
     <link rel="stylesheet" href="/css/color-editor.css">
+    <link rel="stylesheet" href="/css/image-input.css">
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,7 +62,16 @@
                 </div>
             </div>
             <div id="customization-box" class="custom-scrollbar">
-                <h3>Atributos</h3>
+                <h3>Imagem</h3>
+                <div class="row spacing-top">
+                    <div class="image-input">
+                        <img class="preview-image" id="bg-image-preview" src="">
+                        <span>+</span>
+                        <input id="image-input" type="file" accept="image/png, image/jpeg">
+                    </div>
+                </div>
+
+                <h3 class="spacing-top">Atributos</h3>
 
                 <label class="spacing-top">Modelo</label>
                 <horizontal-selector-input id="model-input" value="basic">
