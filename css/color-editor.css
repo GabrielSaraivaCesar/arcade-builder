@@ -1,0 +1,97 @@
+
+.button-color-editor {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+    font-weight: bold;
+    user-select: none;
+    font-size: 20px;
+
+    /* needs to match available colors */
+    border: 5px solid #9b9b9b;
+    background-color: #D9D9D9;
+    color: #0c0c0c;
+}
+.button-color-editor.disabled {
+    opacity: 0.3;
+}
+.button-color-editor.joystick-type,.button-color-editor.legend-type {
+    border-width: 3px !important;
+}
+
+.button-color-editor.small {
+    width: 35px;
+    height: 35px;
+}
+.button-color-editor.keyboard-key {
+    border-radius: 0;
+    width: 30px;
+    height: 30px;
+}
+.color-picker-container {
+    width: 250px;
+    height: auto;
+    border-radius: 12px;
+    background-color: #fff0ca;
+    border: 3px solid #765500;
+    padding: 25px 20px;
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    box-shadow: 0 0 10px 2px #765500;
+}
+.color-picker-container::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -36px;
+    width: 36px;
+    height: 4px;
+    background-color: #765500;
+    box-shadow: 0 0 10px #765500;
+}
+.color-picker-container::before {
+    content: "";
+    position: absolute;
+    top: calc(50% + 21px);
+    right: -74px;
+    width: 50px;
+    height: 4px;
+    background-color: #765500;
+    transform: rotate(55deg);
+    box-shadow: 0 0 10px #765500;
+}
+
+.colors-options {
+    display: flex;
+    margin-top: 8px;
+    justify-content: space-between;
+}
+.color-option {
+    content: attr();
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.4);
+    cursor: pointer;
+}
+.color-option:not(.selected) {
+    filter: contrast(0.2);
+}
+.color-option:hover, .color-option.selected {
+    filter: contrast(2);
+    border-width: 5px;
+}
+
+.button-container, .button-container-lateral {
+    position: relative;
+    width: 100%;
+}
+
