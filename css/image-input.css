@@ -32,7 +32,7 @@
     opacity: 0;
     z-index: 3;
 }
-.preview-image[src=""] {
+.preview-image[src=""], .preview-image:not([src]) {
     display: none;
 }
 .preview-image {

@@ -301,11 +301,58 @@ latBtnsSizeInput.addEventListener('change', (evt) => {
 })
 
 
+
+// ------ MODEL ------
+const modelInput = document.querySelector('#model-input');
+function loadModelInput() {
+    if (modelInput.value === 'slim') {
+        document.querySelector('.btn-lat-1').style.right = "0px";
+        document.querySelector('.btn-lat-1').style.top = "0px";
+        
+        document.querySelector('.btn-lat-2').style.right = "42px";
+        document.querySelector('.btn-lat-2').style.top = "0px";
+
+        document.querySelector('.btn-lat-3').style.right = "84px";
+        document.querySelector('.btn-lat-3').style.top = "0px";
+        
+        document.querySelector('.btn-lat-4').style.left = "84px";
+        document.querySelector('.btn-lat-4').style.top = "0px";
+        
+        document.querySelector('.btn-lat-5').style.left= "42px";
+        document.querySelector('.btn-lat-5').style.top = "0px";
+        
+        document.querySelector('.btn-lat-6').style.left = "0px";
+        document.querySelector('.btn-lat-6').style.top = "0px";
+    } else {
+        document.querySelector('.btn-lat-1').style.right = "50px";
+        document.querySelector('.btn-lat-1').style.top = "0px";
+        
+        document.querySelector('.btn-lat-2').style.right = "50px";
+        document.querySelector('.btn-lat-2').style.top = "50px";
+
+        document.querySelector('.btn-lat-3').style.right = "50px";
+        document.querySelector('.btn-lat-3').style.top = "100px";
+        
+        document.querySelector('.btn-lat-4').style.left = "50px";
+        document.querySelector('.btn-lat-4').style.top = "100px";
+        
+        document.querySelector('.btn-lat-5').style.left= "50px";
+        document.querySelector('.btn-lat-5').style.top = "50px";
+        
+        document.querySelector('.btn-lat-6').style.left = "50px";
+        document.querySelector('.btn-lat-6').style.top = "0px";
+    }
+}
+modelInput.addEventListener('change', () => {
+    loadModelInput();
+})
+
+
 // ------ BACKGROUND IMAGE ------ 
 const imageInput = document.querySelector('#image-input');
 const imagePreview = document.querySelector('#bg-image-preview');
 function loadBackgroundImage(imageUrl) {
-    imagePreview.src = imageUrl;
+    imagePreview.src = imageUrl || '';
 }
 
 imageInput.addEventListener('change', () => {
@@ -405,7 +452,7 @@ importFileButton.addEventListener('change', () => {
         });
 
         if (data['image-input']) {
-            document.getElementById('bg-image-preview').src = data['image-input'];
+            loadBackgroundImage(data['image-input']);
         }
         initAttributeEditor();
     })
@@ -423,6 +470,8 @@ function initAttributeEditor() {
     loadButtonsColors();
     loadLatButtonsVisibility();
     loadLatButtonsSize();
+    loadModelInput();
+
 }
 window.addEventListener('load', () => {
     initAttributeEditor();
