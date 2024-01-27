@@ -55,9 +55,11 @@ function openColorEditorModal(btn) {
     let btnBgColor = btn.getAttribute('data-bg-color');
     let btnBorderColor = btn.getAttribute('data-border-color');
     let btnTextColor = btn.getAttribute('data-text-color');
+    
     [...colorOptionsBtn].find(opt => {
         return opt.getAttribute('data-name') === btnBgColor;
     }).classList.add('selected');
+
     if (!noBorderColor) {
         [...colorOptionsBorder].find(opt => {
             return opt.getAttribute('data-name') === btnBorderColor;
@@ -81,7 +83,7 @@ colorOptionsBtn.forEach(color => {
         colorOptionsBtn.forEach(opt => opt.classList.remove('selected'))
         color.classList.add('selected');
         const {colorCode, colorName} = getColorDataBasedOnColorOptionButton(color);
-        let btn = document.querySelector(`.button-color-editor#${selectedButtonId}`);
+        let btn = document.querySelector(`.color-editor-preview#${selectedButtonId}`);
         if (btn) {
             btn.setAttribute('data-bg-color', colorName);
             btn.style.backgroundColor = colorCode;
@@ -93,7 +95,7 @@ colorOptionsBorder.forEach(color => {
         colorOptionsBorder.forEach(opt => opt.classList.remove('selected'))
         color.classList.add('selected');
         const {colorCode, colorName} = getColorDataBasedOnColorOptionButton(color);
-        let btn = document.querySelector(`.button-color-editor#${selectedButtonId}`);
+        let btn = document.querySelector(`.color-editor-preview#${selectedButtonId}`);
         if (btn) {
             btn.setAttribute('data-border-color', colorName);
             btn.style.borderColor = colorCode;
@@ -105,7 +107,7 @@ colorOptionsText.forEach(color => {
         colorOptionsText.forEach(opt => opt.classList.remove('selected'))
         color.classList.add('selected');
         const {colorCode, colorName} = getColorDataBasedOnColorOptionButton(color);
-        let btn = document.querySelector(`.button-color-editor#${selectedButtonId}`);
+        let btn = document.querySelector(`.color-editor-preview#${selectedButtonId}`);
         if (btn) {
             btn.setAttribute('data-text-color', colorName);
             btn.style.color = colorCode;
@@ -115,7 +117,7 @@ colorOptionsText.forEach(color => {
 
 document.querySelector("#customization-box").addEventListener('scroll', evt => {
     if (!selectedButtonId) return;
-    let btn = document.querySelector(`.button-color-editor#${selectedButtonId}`);
+    let btn = document.querySelector(`.color-editor-preview#${selectedButtonId}`);
     if (btn) {
         let btnRect = btn.getBoundingClientRect();
         if (btnRect.top > window.innerHeight - 65) {
@@ -127,7 +129,7 @@ document.querySelector("#customization-box").addEventListener('scroll', evt => {
 })
 
 
-const buttons = document.querySelectorAll('.button-color-editor');
+const buttons = document.querySelectorAll('.color-editor-preview');
 function loadButtonsColors() {
     buttons.forEach(button => {
         const bg = button.getAttribute('data-bg-color');
@@ -187,7 +189,7 @@ layoutInput.addEventListener('change', () => {
 // ------ INVERT ------  
 const invertInputsButton = document.querySelector('#invert-inputs');
 function invertButtons() {
-    document.querySelectorAll('.button-container .button-color-editor').forEach(buttonColorEditor => {
+    document.querySelectorAll('.button-container .color-editor-preview').forEach(buttonColorEditor => {
         let left = buttonColorEditor.style.left;
         buttonColorEditor.style.left = buttonColorEditor.style.right;
         buttonColorEditor.style.right = left;
@@ -208,7 +210,7 @@ invertInputsButton.addEventListener('change', (evt) => {
 const mainBtnsQuantInput = document.querySelector('#main-btns-quant-input');
 function loadMainButtonsVisibility() {
     const quant = parseInt(mainBtnsQuantInput.value);
-    const extraButtons = document.querySelectorAll('.button-color-editor.btn-8');
+    const extraButtons = document.querySelectorAll('.color-editor-preview.btn-8');
     if (quant === 8) {
         extraButtons.forEach(btn => {
             btn.classList.remove('disabled');
@@ -270,19 +272,19 @@ function loadLatButtonsVisibility() {
     const quant = parseInt(latBtnsQuantInput.value);
 
     if (quant >= 4) 
-        document.querySelector('.button-color-editor.btn-lat-4').classList.remove('disabled');
+        document.querySelector('.color-editor-preview.btn-lat-4').classList.remove('disabled');
     else 
-        document.querySelector('.button-color-editor.btn-lat-4').classList.add('disabled');
+        document.querySelector('.color-editor-preview.btn-lat-4').classList.add('disabled');
     
     if (quant >= 5) 
-        document.querySelector('.button-color-editor.btn-lat-5').classList.remove('disabled');
+        document.querySelector('.color-editor-preview.btn-lat-5').classList.remove('disabled');
     else 
-        document.querySelector('.button-color-editor.btn-lat-5').classList.add('disabled');
+        document.querySelector('.color-editor-preview.btn-lat-5').classList.add('disabled');
     
     if (quant >= 6) 
-        document.querySelector('.button-color-editor.btn-lat-6').classList.remove('disabled');
+        document.querySelector('.color-editor-preview.btn-lat-6').classList.remove('disabled');
     else 
-        document.querySelector('.button-color-editor.btn-lat-6').classList.add('disabled');
+        document.querySelector('.color-editor-preview.btn-lat-6').classList.add('disabled');
     
 }
 latBtnsQuantInput.addEventListener('change', (evt) => {
@@ -342,6 +344,7 @@ function loadModelInput() {
         document.querySelector('.btn-lat-6').style.left = "50px";
         document.querySelector('.btn-lat-6').style.top = "0px";
     }
+
 }
 modelInput.addEventListener('change', () => {
     loadModelInput();
@@ -405,7 +408,7 @@ exportFileButton.addEventListener('click', () => {
     }
 
     // All main buttons
-    document.querySelectorAll('.button-container#layout-'+resultJson['layout-input']+' .button-color-editor').forEach(button => {
+    document.querySelectorAll('.button-container#layout-'+resultJson['layout-input']+' .color-editor-preview').forEach(button => {
         addColorEditorToFile(button)
     });
     
@@ -414,7 +417,7 @@ exportFileButton.addEventListener('click', () => {
     addColorEditorToFile(legendColor);
    
     // All lateral buttons
-    document.querySelectorAll('.button-container-lateral .button-color-editor').forEach(button => {
+    document.querySelectorAll('.button-container-lateral .color-editor-preview').forEach(button => {
         addColorEditorToFile(button)
     });
 

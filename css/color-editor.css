@@ -1,5 +1,5 @@
 
-.button-color-editor {
+.color-editor-preview {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -17,18 +17,18 @@
     background-color: #D9D9D9;
     color: #0c0c0c;
 }
-.button-color-editor.disabled {
+.color-editor-preview.disabled {
     opacity: 0.3;
 }
-.button-color-editor.joystick-type,.button-color-editor.legend-type {
+.color-editor-preview.joystick-type,.color-editor-preview.legend-type {
     border-width: 3px !important;
 }
 
-.button-color-editor.small {
+.color-editor-preview.small {
     width: 35px;
     height: 35px;
 }
-.button-color-editor.keyboard-key {
+.color-editor-preview.keyboard-key {
     border-radius: 0;
     width: 30px;
     height: 30px;

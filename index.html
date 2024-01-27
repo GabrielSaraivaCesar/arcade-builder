@@ -24,6 +24,7 @@
     <h2 class="hidden">Ultra Arcade</h2>
 
     <main>
+        <div class="scene-renderer" id="2d-scene-renderer"></div>
         <div id="customization-box-outer">
             <div class="color-picker-container">
                 <div class="color-picker-btn">
@@ -149,117 +150,117 @@
                 
                 <div class="spacing-top">
                     <div class="button-container" id="layout-americano" style="height: 120px;">
-                        <div class="button-color-editor btn-8 disabled" id="americano-l1" style="right: 0; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor btn-8 disabled" id="americano-l2" style="right: 0; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="americano-r1" style="right: 50px; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="americano-r2" style="right: 50px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="americano-triangle" style="right: 100px; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="americano-circle" style="right: 100px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="americano-square" style="right: 150px; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="americano-x" style="right: 150px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor joystick-type" id="americano-joystick" style="left: 10px; top: 25px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-8 disabled" id="americano-l1" style="right: 0; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-8 disabled" id="americano-l2" style="right: 0; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="americano-r1" style="right: 50px; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="americano-r2" style="right: 50px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="americano-triangle" style="right: 100px; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="americano-circle" style="right: 100px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="americano-square" style="right: 150px; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="americano-x" style="right: 150px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview joystick-type" id="americano-joystick" style="left: 10px; top: 25px;" data-bg-color="white" data-border-color="white"></div>
                     </div>
                     <div class="button-container" id="layout-japones" style="display: none; height: 120px;">
-                        <div class="button-color-editor btn-8 disabled" id="japones-l1" style="right: 0; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor btn-8 disabled" id="japones-l2" style="right: 10px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="japones-r1" style="right: 50px; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="japones-r2" style="right: 60px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="japones-triangle" style="right: 100px; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="japones-circle" style="right: 110px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="japones-square" style="right: 150px; top: 25px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="japones-x" style="right: 160px; top: 75px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor joystick-type" id="japones-joystick" style="left: 10px; top: 40px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-8 disabled" id="japones-l1" style="right: 0; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-8 disabled" id="japones-l2" style="right: 10px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="japones-r1" style="right: 50px; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="japones-r2" style="right: 60px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="japones-triangle" style="right: 100px; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="japones-circle" style="right: 110px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="japones-square" style="right: 150px; top: 25px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="japones-x" style="right: 160px; top: 75px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview joystick-type" id="japones-joystick" style="left: 10px; top: 40px;" data-bg-color="white" data-border-color="white"></div>
                     </div>
                     <div class="button-container" id="layout-astro_city" style="display: none; height: 120px;">
-                        <div class="button-color-editor btn-8 disabled" id="astro_city-l1" style="right: 0; top: 27px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor btn-8 disabled" id="astro_city-l2" style="right: 10px; top: 77px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="astro_city-r1" style="right: 50px; top: 12px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="astro_city-r2" style="right: 60px; top: 62px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="astro_city-triangle" style="right: 100px; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="astro_city-circle" style="right: 110px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="astro_city-square" style="right: 150px; top: 25px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="astro_city-x" style="right: 160px; top: 75px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor joystick-type" id="astro_city-joystick" style="left: 10px; top: 40px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-8 disabled" id="astro_city-l1" style="right: 0; top: 27px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-8 disabled" id="astro_city-l2" style="right: 10px; top: 77px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="astro_city-r1" style="right: 50px; top: 12px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="astro_city-r2" style="right: 60px; top: 62px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="astro_city-triangle" style="right: 100px; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="astro_city-circle" style="right: 110px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="astro_city-square" style="right: 150px; top: 25px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="astro_city-x" style="right: 160px; top: 75px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview joystick-type" id="astro_city-joystick" style="left: 10px; top: 40px;" data-bg-color="white" data-border-color="white"></div>
                     </div>
                     <div class="button-container" id="layout-hitbox" style="display: none; height: 150px;">
-                        <div class="button-color-editor btn-8 disabled" id="hitbox-l1" style="right: 0; top: 10px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor btn-8 disabled" id="hitbox-l2" style="right: 0; top: 60px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="hitbox-r1" style="right: 45px; top: 0px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="hitbox-r2" style="right: 45px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="hitbox-triangle" style="right: 90px; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="hitbox-circle" style="right: 90px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="hitbox-square" style="right: 135px; top: 10px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="hitbox-x" style="right: 135px; top: 60px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-8 disabled" id="hitbox-l1" style="right: 0; top: 10px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-8 disabled" id="hitbox-l2" style="right: 0; top: 60px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="hitbox-r1" style="right: 45px; top: 0px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="hitbox-r2" style="right: 45px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="hitbox-triangle" style="right: 90px; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="hitbox-circle" style="right: 90px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="hitbox-square" style="right: 135px; top: 10px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="hitbox-x" style="right: 135px; top: 60px;" data-bg-color="white" data-border-color="white"></div>
 
-                        <div class="button-color-editor small" id="hitbox-lh-1" style="right: 175px; top: 40px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor small" id="hitbox-lh-2" style="right: 205px; top: 20px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor small" id="hitbox-lh-3" style="right: 241px; top: 20px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="hitbox-lh-4" style="right: 160px; top: 100px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview small" id="hitbox-lh-1" style="right: 175px; top: 40px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview small" id="hitbox-lh-2" style="right: 205px; top: 20px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview small" id="hitbox-lh-3" style="right: 241px; top: 20px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="hitbox-lh-4" style="right: 160px; top: 100px;" data-bg-color="white" data-border-color="white"></div>
                     </div>
                     <div class="button-container" id="layout-wasd_hitbox" style="display: none; height: 130px;">
-                        <div class="button-color-editor btn-8 disabled" id="wasd_hitbox-l1" style="right: 0; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor btn-8 disabled" id="wasd_hitbox-l2" style="right: 0; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="wasd_hitbox-r1" style="right: 45px; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="wasd_hitbox-r2" style="right: 45px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="wasd_hitbox-triangle" style="right: 90px; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="wasd_hitbox-circle" style="right: 90px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="wasd_hitbox-square" style="right: 130px; top: 25px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="wasd_hitbox-x" style="right: 130px; top: 75px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-8 disabled" id="wasd_hitbox-l1" style="right: 0; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-8 disabled" id="wasd_hitbox-l2" style="right: 0; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="wasd_hitbox-r1" style="right: 45px; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="wasd_hitbox-r2" style="right: 45px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="wasd_hitbox-triangle" style="right: 90px; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="wasd_hitbox-circle" style="right: 90px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="wasd_hitbox-square" style="right: 130px; top: 25px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="wasd_hitbox-x" style="right: 130px; top: 75px;" data-bg-color="white" data-border-color="white"></div>
                         
-                        <div class="button-color-editor small" id="wasd_hitbox-w" style="right: 215px; top: 10px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor small" id="wasd_hitbox-a" style="right: 255px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor small" id="wasd_hitbox-s" style="right: 215px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor small" id="wasd_hitbox-d" style="right: 175px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview small" id="wasd_hitbox-w" style="right: 215px; top: 10px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview small" id="wasd_hitbox-a" style="right: 255px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview small" id="wasd_hitbox-s" style="right: 215px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview small" id="wasd_hitbox-d" style="right: 175px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
                     </div>
                     <div class="button-container" id="layout-crossup" style="display: none; height: 230px;">
-                        <div class="button-color-editor btn-8 disabled" id="crossup-l1" style="right: 0; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor btn-8 disabled" id="crossup-l2" style="right: 0; top: 100px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-8 disabled" id="crossup-l1" style="right: 0; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-8 disabled" id="crossup-l2" style="right: 0; top: 100px;" data-bg-color="white" data-border-color="white"></div>
                         
-                        <div class="button-color-editor" id="crossup-r1" style="right: 50px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="crossup-r2" style="right: 50px; top: 100px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="crossup-r1" style="right: 50px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="crossup-r2" style="right: 50px; top: 100px;" data-bg-color="white" data-border-color="white"></div>
                         
-                        <div class="button-color-editor" id="crossup-triangle" style="right: 100px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="crossup-circle" style="right: 100px; top: 100px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="crossup-triangle" style="right: 100px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="crossup-circle" style="right: 100px; top: 100px;" data-bg-color="white" data-border-color="white"></div>
                         
-                        <div class="button-color-editor" id="crossup-square" style="right: 150px; top: 75px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="crossup-x" style="right: 150px; top: 125px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="crossup-square" style="right: 150px; top: 75px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="crossup-x" style="right: 150px; top: 125px;" data-bg-color="white" data-border-color="white"></div>
                         
-                        <div class="button-color-editor" id="crossup-lh-1" style="right: 45px; top: 0px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="crossup-lh-2" style="right: 90px; top: 0px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="crossup-lh-3" style="right: 140px; top: 25px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="crossup-lh-4" style="right: 140px; top: calc(125px + 40px + 5px);" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="crossup-lh-1" style="right: 45px; top: 0px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="crossup-lh-2" style="right: 90px; top: 0px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="crossup-lh-3" style="right: 140px; top: 25px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="crossup-lh-4" style="right: 140px; top: calc(125px + 40px + 5px);" data-bg-color="white" data-border-color="white"></div>
                     
-                        <div class="button-color-editor joystick-type" id="crossup-joystick" style="left: 10px; top: 55px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview joystick-type" id="crossup-joystick" style="left: 10px; top: 55px;" data-bg-color="white" data-border-color="white"></div>
                     </div>
                     <div class="button-container" id="layout-mixbox" style="display: none; height: 130px;">
-                        <div class="button-color-editor btn-8 disabled" id="mixbox-l1" style="right: 0; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor btn-8 disabled" id="mixbox-l2" style="right: 0; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="mixbox-r1" style="right: 45px; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="mixbox-r2" style="right: 45px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="mixbox-triangle" style="right: 90px; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="mixbox-circle" style="right: 90px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="mixbox-square" style="right: 130px; top: 25px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor" id="mixbox-x" style="right: 130px; top: 75px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-8 disabled" id="mixbox-l1" style="right: 0; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-8 disabled" id="mixbox-l2" style="right: 0; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="mixbox-r1" style="right: 45px; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="mixbox-r2" style="right: 45px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="mixbox-triangle" style="right: 90px; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="mixbox-circle" style="right: 90px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="mixbox-square" style="right: 130px; top: 25px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview" id="mixbox-x" style="right: 130px; top: 75px;" data-bg-color="white" data-border-color="white"></div>
                         
-                        <div class="button-color-editor keyboard-key" id="mixbox-w" style="right: 215px; top: 17px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor keyboard-key" id="mixbox-a" style="right: 248px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor keyboard-key" id="mixbox-s" style="right: 215px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor keyboard-key" id="mixbox-d" style="right: 182px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview keyboard-key" id="mixbox-w" style="right: 215px; top: 17px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview keyboard-key" id="mixbox-a" style="right: 248px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview keyboard-key" id="mixbox-s" style="right: 215px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview keyboard-key" id="mixbox-d" style="right: 182px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
                     </div>
                     <div class="button-container" id="layout-full_mx" style="display: none; height: 120px;">
-                        <div class="button-color-editor keyboard-key btn-8 disabled" id="full_mx-l1" style="right: 0; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor keyboard-key btn-8 disabled" id="full_mx-l2" style="right: 0; top: 33px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor keyboard-key" id="full_mx-r1" style="right: 33px; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor keyboard-key" id="full_mx-r2" style="right: 33px; top: 33px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor keyboard-key" id="full_mx-triangle" style="right: 66px; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor keyboard-key" id="full_mx-circle" style="right: 66px; top: 33px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor keyboard-key" id="full_mx-square" style="right: 99px; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor keyboard-key" id="full_mx-x" style="right: 99px; top: 33px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview keyboard-key btn-8 disabled" id="full_mx-l1" style="right: 0; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview keyboard-key btn-8 disabled" id="full_mx-l2" style="right: 0; top: 33px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview keyboard-key" id="full_mx-r1" style="right: 33px; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview keyboard-key" id="full_mx-r2" style="right: 33px; top: 33px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview keyboard-key" id="full_mx-triangle" style="right: 66px; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview keyboard-key" id="full_mx-circle" style="right: 66px; top: 33px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview keyboard-key" id="full_mx-square" style="right: 99px; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview keyboard-key" id="full_mx-x" style="right: 99px; top: 33px;" data-bg-color="white" data-border-color="white"></div>
 
-                        <div class="button-color-editor keyboard-key" id="full_mx-w" style="right: 215px; top: 0px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor keyboard-key" id="full_mx-a" style="right: 248px; top: 33px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor keyboard-key" id="full_mx-s" style="right: 215px; top: 33px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor keyboard-key" id="full_mx-d" style="right: 182px; top: 33px;" data-bg-color="white" data-border-color="white" data-text-color="black"></div>
+                        <div class="color-editor-preview keyboard-key" id="full_mx-w" style="right: 215px; top: 0px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview keyboard-key" id="full_mx-a" style="right: 248px; top: 33px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview keyboard-key" id="full_mx-s" style="right: 215px; top: 33px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview keyboard-key" id="full_mx-d" style="right: 182px; top: 33px;" data-bg-color="white" data-border-color="white" data-text-color="black"></div>
                     </div>
                 </div>
 
@@ -295,7 +296,7 @@
                             <label>Cor</label>
                         </div>
                         <div style="height: 50px; display: flex; align-items: center;">
-                            <div class="button-color-editor legend-type" id="legend-color-btn" style="position: relative;" data-bg-color="black" data-border-color="white" data-text-color="white">
+                            <div class="color-editor-preview legend-type" id="legend-color-btn" style="position: relative;" data-bg-color="black" data-border-color="white" data-text-color="white">
                                 Y
                             </div>
                         </div>
@@ -341,12 +342,12 @@
                 <div class="spacing-top">
 
                     <div class="button-container-lateral"  style="height: 160px;">
-                        <div class="button-color-editor btn-lat-1" id="lat-1" style="right: 50px; top: 0;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor btn-lat-2" id="lat-2" style="right: 50px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor btn-lat-3" id="lat-3" style="right: 50px; top: 100px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor btn-lat-4 disabled" id="lat-4" style="left: 50px; top: 100px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor btn-lat-5 disabled" id="lat-5" style="left: 50px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
-                        <div class="button-color-editor btn-lat-6 disabled" id="lat-6" style="left: 50px; top: 0px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-lat-1" id="lat-1" style="right: 50px; top: 0;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-lat-2" id="lat-2" style="right: 50px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-lat-3" id="lat-3" style="right: 50px; top: 100px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-lat-4 disabled" id="lat-4" style="left: 50px; top: 100px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-lat-5 disabled" id="lat-5" style="left: 50px; top: 50px;" data-bg-color="white" data-border-color="white"></div>
+                        <div class="color-editor-preview btn-lat-6 disabled" id="lat-6" style="left: 50px; top: 0px;" data-bg-color="white" data-border-color="white"></div>
                     </div>
                 </div>
 
@@ -369,6 +370,6 @@
 <script src="https://kit.fontawesome.com/bb7d73c661.js" crossorigin="anonymous"></script>
 <script src="/js/utils.js"></script>
 <script type="module" src="/js/main.js"></script>
-<script src="/js/horizontal_selector_input.js"></script>
+<script src="/js/components/horizontal_selector_input.js"></script>
 <script src="/js/attribute_editor.js"></script>
 <script src="/js/tooltip.js"></script>
