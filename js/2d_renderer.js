@@ -16,10 +16,10 @@ export default class SceneRenderer {
 
         const joystick = PIXI.Sprite.from('/images/sprites/joystick-sprite.png')
         this.app.stage.addChild(joystick);
-        joystick.x = 200;
-        joystick.y = 150;
+        joystick.x = this.milimetersToPixels(87.5);
+        joystick.y = this.milimetersToPixels(77.5);
         
-        this.applyFilter(joystick, "#FF0606")
+        this.applyFilter(joystick, "#770000")
     }
 
     applyFilter(sprite, color) {
@@ -61,6 +61,10 @@ export default class SceneRenderer {
         ];
     }
 
+    milimetersToPixels(milimeters) {
+        return milimeters * 2; // X2 will be the standard scale to make the image be big enough in terms of pixels
+    }
+
     changeBoardModel(modelName) {
         if (this.board && !this.board._destroyed)
             this.board.destroy();
@@ -85,17 +89,28 @@ export default class SceneRenderer {
         }
 
         
-        const boardSprite = PIXI.Sprite.from(boardSpritePath);
-        const bgImage = PIXI.Sprite.from('/images/test.jpeg');
-        bgImage.mask = boardSprite;
-        this.app.stage.addChild(boardSprite);
-        this.app.stage.addChild(bgImage);
-
-        boardSprite.texture.baseTexture.on('loaded', () => {
-            console.log('Width:', boardSprite.width, 'Height:', boardSprite.height);
-            bgImage.width = boardSprite.width;
-            bgImage.height = boardSprite.height;
-    
-        });
+        this.board = PIXI.Sprite.from(boardSpritePath);
+        this.app.stage.addChildAt(this.board, 0);
+        this.applyFilter(this.board, "#0c0c0c");
     }
+
+    setBackgroundImage(imageUrl) {
+        if (this.boardImageSprite && !this.boardImageSprite._destroyed)
+            this.boardImageSprite.destroy();
+
+        this.boardImageSprite = PIXI.Sprite.from(imageUrl);
+        this.boardImageSprite.mask = this.board;
+        this.app.stage.addChildAt(this.boardImageSprite, 1);
+        
+        if (this.board.texture.baseTexture.valid) { // If board sprite is loaded
+            this.boardImageSprite.width = this.board.width;
+            this.boardImageSprite.height = this.board.height;
+        } else {
+            this.board.texture.baseTexture.on('loaded', () => {
+                this.boardImageSprite.width = this.board.width;
+                this.boardImageSprite.height = this.board.height;
+            });
+        }
+    }
+
 }

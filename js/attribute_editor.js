@@ -356,6 +356,10 @@ const imageInput = document.querySelector('#image-input');
 const imagePreview = document.querySelector('#bg-image-preview');
 function loadBackgroundImage(imageUrl) {
     imagePreview.src = imageUrl || '';
+    const evt = new CustomEvent('background-image-change', {
+        detail: imageUrl,
+    });
+    window.dispatchEvent(evt);
 }
 
 imageInput.addEventListener('change', () => {
@@ -364,8 +368,6 @@ imageInput.addEventListener('change', () => {
         readImage(file).then(url => {
             loadBackgroundImage(url);
         })
-    } else {
-        loadBackgroundImage("")
     }
 
 })
