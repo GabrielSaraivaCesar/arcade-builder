@@ -19,7 +19,12 @@ export default class SceneRenderer {
         joystick.x = this.milimetersToPixels(87.5);
         joystick.y = this.milimetersToPixels(77.5);
         
-        this.applyFilter(joystick, "#770000")
+        this.applyFilter(joystick, "#770000");
+
+        setTimeout(() => {
+            container.style.opacity = 1;
+            container.style.left = '0px';
+        }, 100)
     }
 
     applyFilter(sprite, color) {
@@ -124,6 +129,18 @@ export default class SceneRenderer {
                 this.boardImageSprite.height = this.board.height;
             });
         }
+    }
+
+    downloadRenderImage() {
+        
+        this.app.renderer.extract.canvas(this.app.stage).toBlob(function(blob){
+            var a = document.createElement('a');
+            document.body.append(a);
+            a.download = "Template_Arcade.png";
+            a.href = URL.createObjectURL(blob);
+            a.click();
+            a.remove();
+        }, 'image/png');
     }
 
 }

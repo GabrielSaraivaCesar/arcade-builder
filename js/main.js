@@ -14,3 +14,6 @@ window.addEventListener('board-model-change', (evt) => {
     let model = evt.detail;
     sceneRenderer.changeBoardModel(model);
 })
+document.getElementById('export-img-btn').addEventListener('click', () => {
+    sceneRenderer.downloadRenderImage();
+})
