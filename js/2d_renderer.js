@@ -62,7 +62,7 @@ export default class SceneRenderer {
     }
 
     milimetersToPixels(milimeters) {
-        return milimeters * 2; // X2 will be the standard scale to make the image be big enough in terms of pixels
+        return milimeters * 1.86; // X1.86 will be the standard scale to make the image be big enough in terms of pixels
     }
 
     changeBoardModel(modelName) {
@@ -90,6 +90,19 @@ export default class SceneRenderer {
 
         
         this.board = PIXI.Sprite.from(boardSpritePath);
+
+        if (this.boardImageSprite && !this.boardImageSprite._destroyed) {
+            this.boardImageSprite.mask = this.board;
+            if (this.board.texture.baseTexture.valid) { // If board sprite is loaded
+                this.boardImageSprite.width = this.board.width;
+                this.boardImageSprite.height = this.board.height;
+            } else {
+                this.board.texture.baseTexture.on('loaded', () => {
+                    this.boardImageSprite.width = this.board.width;
+                    this.boardImageSprite.height = this.board.height;
+                });
+            }
+        }
         this.app.stage.addChildAt(this.board, 0);
         this.applyFilter(this.board, "#0c0c0c");
     }

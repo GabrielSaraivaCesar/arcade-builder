@@ -10,3 +10,7 @@ window.addEventListener('background-image-change', (evt) => {
     let url = evt.detail;
     sceneRenderer.setBackgroundImage(url);
 })
+window.addEventListener('board-model-change', (evt) => {
+    let model = evt.detail;
+    sceneRenderer.changeBoardModel(model);
+})

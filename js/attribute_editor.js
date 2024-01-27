@@ -345,6 +345,10 @@ function loadModelInput() {
         document.querySelector('.btn-lat-6').style.top = "0px";
     }
 
+    const evt = new CustomEvent('board-model-change', {
+        detail: modelInput.value,
+    });
+    window.dispatchEvent(evt);
 }
 modelInput.addEventListener('change', () => {
     loadModelInput();
