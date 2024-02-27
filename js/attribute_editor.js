@@ -179,6 +179,12 @@ function loadArcadeLayout() {
         btnContainer.style.display = 'none';
     });
     document.querySelector('.button-container#layout-'+layoutInput.value).style.display = 'block';
+
+    
+    const evt = new CustomEvent('board-layout-change', {
+        detail: layoutInput.value,
+    });
+    window.dispatchEvent(evt)
 }
 layoutInput.addEventListener('change', () => {
     loadArcadeLayout();
@@ -470,7 +476,6 @@ importFileButton.addEventListener('change', () => {
 function initAttributeEditor() {
     
     // Execute functions based on input values
-    loadArcadeLayout();
     loadMainButtonsVisibility();
     loadMainButtonsSize();
     initButtonsInvertState();
@@ -480,6 +485,7 @@ function initAttributeEditor() {
     loadLatButtonsVisibility();
     loadLatButtonsSize();
     loadModelInput();
+    loadArcadeLayout();
 
 }
 window.addEventListener('load', () => {

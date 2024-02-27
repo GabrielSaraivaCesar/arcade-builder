@@ -1,30 +1,37 @@
 import * as PIXI from './libs/pixi.js';
-
+import { PieceTypes, PositioningRef, AMERICANO } from './data/layouts_positioning.js';
 
 
 export default class SceneRenderer {
+
+    boardMargin = 50
 
     init(container) {
         this.app = new PIXI.Application({ 
             backgroundAlpha: 0,
             resizeTo: container,
         });
+
         container.appendChild(this.app.view);
+
+
+        this.boardContainer = new PIXI.Container();
+        this.boardImageContainer = new PIXI.Container();
+        this.buttonsContainer = new PIXI.Container();
+
+        this.app.stage.addChildAt(this.boardContainer, 0);
+        this.app.stage.addChildAt(this.boardImageContainer, 1);
+        this.app.stage.addChildAt(this.buttonsContainer, 2);
 
         // Default settings
         this.changeBoardModel('basic');
 
-        const joystick = PIXI.Sprite.from('/images/sprites/joystick-sprite.png')
-        this.app.stage.addChild(joystick);
-        joystick.x = this.milimetersToPixels(87.5);
-        joystick.y = this.milimetersToPixels(77.5);
-        
-        this.applyFilter(joystick, "#770000");
-
         setTimeout(() => {
             container.style.opacity = 1;
             container.style.left = '0px';
-        }, 100)
+        }, 100);
+
+        this.buttons = {}
     }
 
     applyFilter(sprite, color) {
@@ -70,9 +77,66 @@ export default class SceneRenderer {
         return milimeters * 1.86; // X1.86 will be the standard scale to make the image be big enough in terms of pixels
     }
 
+    milimetersToRelativePixelsX(milimeters, ref=PositioningRef.TOPLEFT) {
+        if (ref === PositioningRef.CENTER) {
+            return this.milimetersToPixels(milimeters) + this.boardMargin + (this.board.width/2);
+        }
+        return this.milimetersToPixels(milimeters) + this.boardMargin;
+    }
+    milimetersToRelativePixelsY(milimeters, ref=PositioningRef.TOPLEFT) {
+        if (ref === PositioningRef.CENTER) {
+            return this.milimetersToPixels(milimeters) + this.boardMargin + (this.board.height/2);
+        }
+        return this.milimetersToPixels(milimeters) + this.boardMargin;
+    }
+
+
+    setBackgroundImageSize() {
+        if (!this.board || this.board.texture.baseTexture?.valid == false) {
+            console.log('well..')
+            return;
+        }
+        this.boardImageSprite.width = this.board.width;
+        this.boardImageSprite.height = this.board.height;
+    }
+
+    setBackgroundImage(imageUrl) {
+        if (this.boardImageSprite && !this.boardImageSprite._destroyed)
+            this.boardImageSprite.destroy();
+
+        this.imageUrl = imageUrl
+        this.boardImageSprite = PIXI.Sprite.from(this.imageUrl);
+        this.boardImageSprite.x = this.board.x;
+        this.boardImageSprite.y = this.board.y;
+        this.boardImageSprite.mask = this.board;
+        this.boardImageContainer.addChild(this.boardImageSprite);
+        
+        if (this.board.texture.baseTexture.valid) { // If board sprite is loaded
+            this.setBackgroundImageSize();
+        } else {
+            this.board.texture.baseTexture.on('loaded', () => {
+                this.setBackgroundImageSize();
+            });
+        }
+    }
+
+    downloadRenderImage() {
+        this.app.renderer.extract.canvas(this.app.stage).toBlob(function(blob){
+            var a = document.createElement('a');
+            document.body.append(a);
+            a.download = "Template_Arcade.png";
+            a.href = URL.createObjectURL(blob);
+            a.click();
+            a.remove();
+        }, 'image/png');
+    }
+
+    
     changeBoardModel(modelName) {
-        if (this.board && !this.board._destroyed)
+        if (this.board && !this.board._destroyed) {
             this.board.destroy();
+            this.boardCopy.destroy();
+        }
 
         let boardSpritePath = '/images/sprites/';
 
@@ -94,53 +158,92 @@ export default class SceneRenderer {
         }
 
         
-        this.board = PIXI.Sprite.from(boardSpritePath);
-
         if (this.boardImageSprite && !this.boardImageSprite._destroyed) {
-            this.boardImageSprite.mask = this.board;
-            if (this.board.texture.baseTexture.valid) { // If board sprite is loaded
-                this.boardImageSprite.width = this.board.width;
-                this.boardImageSprite.height = this.board.height;
-            } else {
-                this.board.texture.baseTexture.on('loaded', () => {
-                    this.boardImageSprite.width = this.board.width;
-                    this.boardImageSprite.height = this.board.height;
-                });
+            this.boardImageSprite.mask = null; // Remove mask to avoid errors since this.board will be destroyed
+        }
+        this.board = PIXI.Sprite.from(boardSpritePath);
+        this.boardCopy = PIXI.Sprite.from(boardSpritePath);
+
+        const onBoardLoad = () => {
+            this.board.width -= 6;
+            this.board.height -= 6;
+
+            if (this.boardImageSprite && !this.boardImageSprite._destroyed) {
+                this.boardImageSprite.mask = this.board;
+                this.setBackgroundImageSize();
+            }
+            if (this.layoutName) {
+                this.changeBoardLayout(this.layoutName);
             }
         }
-        this.app.stage.addChildAt(this.board, 0);
+
+        this.boardContainer.removeChildren();
+        this.boardCopy.x = this.boardMargin;
+        this.boardCopy.y = this.boardMargin;
+        this.boardContainer.addChild(this.boardCopy);
+
+        this.board.x = this.boardMargin + 3;
+        this.board.y = this.boardMargin + 3;
+        this.boardContainer.addChild(this.board);
+
         this.applyFilter(this.board, "#0c0c0c");
-    }
+        this.applyFilter(this.boardCopy, "#0c0c0c");
 
-    setBackgroundImage(imageUrl) {
-        if (this.boardImageSprite && !this.boardImageSprite._destroyed)
-            this.boardImageSprite.destroy();
-
-        this.boardImageSprite = PIXI.Sprite.from(imageUrl);
-        this.boardImageSprite.mask = this.board;
-        this.app.stage.addChildAt(this.boardImageSprite, 1);
-        
-        if (this.board.texture.baseTexture.valid) { // If board sprite is loaded
-            this.boardImageSprite.width = this.board.width;
-            this.boardImageSprite.height = this.board.height;
+        if (this.board.texture.baseTexture.valid) { 
+            onBoardLoad();
         } else {
             this.board.texture.baseTexture.on('loaded', () => {
-                this.boardImageSprite.width = this.board.width;
-                this.boardImageSprite.height = this.board.height;
+                onBoardLoad();
             });
         }
     }
 
-    downloadRenderImage() {
+
+    changeBoardLayout(layoutName) {
+        this.layoutName = layoutName;
+        let layoutConfig = null;
+
+        switch (layoutName) {
+            case 'americano':
+                layoutConfig = AMERICANO
+                break;
         
-        this.app.renderer.extract.canvas(this.app.stage).toBlob(function(blob){
-            var a = document.createElement('a');
-            document.body.append(a);
-            a.download = "Template_Arcade.png";
-            a.href = URL.createObjectURL(blob);
-            a.click();
-            a.remove();
-        }, 'image/png');
+            default:
+                break;
+        }
+
+        if (layoutConfig === null) return;
+
+        if (this.joystick) {
+            this.joystick.destroy();
+        }
+        if (this.buttons) {
+            Object.keys(this.buttons).forEach(buttonName => {
+                this.buttons[buttonName].destroy();
+            })
+        }
+
+        layoutConfig.forEach(config => {
+            let obj = null;
+            if (config.type === PieceTypes.JOYSTICK) {
+                this.joystick = PIXI.Sprite.from('/images/sprites/joystick-sprite.png')
+                obj = this.joystick;
+
+            } else if (config.type === PieceTypes.BUTTON) {
+                if (config.size === 30) {
+                    this.buttons[config.buttonName] = PIXI.Sprite.from('/images/sprites/btn-30-sprite.png')
+                } else if (config.size === 25) {
+                    this.buttons[config.buttonName] = PIXI.Sprite.from('/images/sprites/btn-25-sprite.png')
+                }
+                obj = this.buttons[config.buttonName];
+            }
+
+            obj.anchor.set(0.5);
+            obj.visible = true;
+            this.buttonsContainer.addChild(obj);
+            obj.x = this.milimetersToRelativePixelsX(config.left, config.ref);
+            obj.y = this.milimetersToRelativePixelsY(config.top, config.ref);
+        })
     }
 
 }
