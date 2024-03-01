@@ -200,6 +200,11 @@ function invertButtons() {
         buttonColorEditor.style.left = buttonColorEditor.style.right;
         buttonColorEditor.style.right = left;
     })
+    
+    const evt = new CustomEvent('layout-invert-change', {
+        detail: invertInputsButton.checked,
+    });
+    window.dispatchEvent(evt)
 }
 function initButtonsInvertState() {
     if (invertInputsButton.checked === true) {

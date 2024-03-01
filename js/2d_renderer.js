@@ -5,6 +5,8 @@ import { PieceTypes, PositioningRef, AMERICANO } from './data/layouts_positionin
 export default class SceneRenderer {
 
     boardMargin = 50
+    inverted = false
+    layoutName = "americano"
 
     init(container) {
         this.app = new PIXI.Application({ 
@@ -198,7 +200,6 @@ export default class SceneRenderer {
         }
     }
 
-
     changeBoardLayout(layoutName) {
         this.layoutName = layoutName;
         let layoutConfig = null;
@@ -241,9 +242,18 @@ export default class SceneRenderer {
             obj.anchor.set(0.5);
             obj.visible = true;
             this.buttonsContainer.addChild(obj);
-            obj.x = this.milimetersToRelativePixelsX(config.left, config.ref);
+            
+            let leftValue = config.left;
+            if (this.inverted) {
+                leftValue = (config.left * -1) + 11; // 11 milimeters correction
+            }
+            obj.x = this.milimetersToRelativePixelsX(leftValue, config.ref);
             obj.y = this.milimetersToRelativePixelsY(config.top, config.ref);
         })
     }
 
+    setLayoutInvertState(inverted) {
+        this.inverted = inverted;
+        this.changeBoardLayout(this.layoutName);
+    }
 }

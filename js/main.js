@@ -17,8 +17,10 @@ window.addEventListener('board-model-change', (evt) => {
 document.getElementById('export-img-btn').addEventListener('click', () => {
     sceneRenderer.downloadRenderImage();
 })
-
 window.addEventListener('board-layout-change', (evt) => {
     let layout = evt.detail;
     sceneRenderer.changeBoardLayout(layout);
+})
+window.addEventListener('layout-invert-change', (evt) => {
+    sceneRenderer.setLayoutInvertState(evt.detail);
 })

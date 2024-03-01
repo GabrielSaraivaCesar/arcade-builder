@@ -69,6 +69,22 @@ const AMERICANO = [
         size: 30,
         ref: PositioningRef.CENTER
     },
+    {
+        type: PieceTypes.BUTTON,
+        left: 35 + 35 + 35,
+        top: -32,
+        buttonName: 'l1',
+        size: 30,
+        ref: PositioningRef.CENTER
+    },
+    {
+        type: PieceTypes.BUTTON,
+        left: 35 + 35 + 35,
+        top: -32 + 40,
+        buttonName: 'l2',
+        size: 30,
+        ref: PositioningRef.CENTER
+    },
 ]
 
 export {
